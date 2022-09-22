@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import commonStyle from '../styles/Common.module.css';
 
-interface UseStatePageProps {
-
-}
-
-const UseStatePage: React.FC<UseStatePageProps> = () => {
+const UseStatePage = () => {
 
     const [isActive, setIsActive] = useState(false);
 
@@ -17,7 +13,9 @@ const UseStatePage: React.FC<UseStatePageProps> = () => {
             ) : (
                 <div>Not Active</div>
             )}
-            <button className={commonStyle.button} onClick={() => setIsActive((prev) => !prev)}>
+            <button
+                className={commonStyle.button}
+                onClick={() => setIsActive((prev) => !prev)}>
                 Change
             </button>
         </div>

@@ -1,32 +1,29 @@
-import React, {memo, useCallback, useState} from 'react'
+import React, { memo } from 'react'
+import useCustomHookPage from "../components/custom-hook/useCustomHookPage";
 
-const styleUseCallBack: any = {
+const styleCustomHook: any = {
     wrapper: { width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 40 },
     wrapperTodo: { backgroundColor: 'gray', borderRadius: 5, padding: '5px 10px', marginBottom: 5 },
     textTodo: { lineHeight: 'normal', margin: 0, color: 'white' }
 }
 
-const UseCallBackPage = () => {
-    const [todos, setTodos] = useState<string[]>([]);
-
-    const addWithCallback = useCallback((value: string) => {
-        setTodos((prev) => ([...prev, value]));
-    }, []);
+const CustomHookPage = () => {
+    const { todos, addWithCallback } = useCustomHookPage();
 
     return (
-        <div style={styleUseCallBack.wrapper}>
-            <h4>Demo UseCallback</h4>
-            <ChildUseCallbackPage addCount={addWithCallback} />
+        <div style={styleCustomHook.wrapper}>
+            <h4>Demo Custom Hook</h4>
+            <ChildComponent addCount={addWithCallback} />
             {todos.map((e, index) => (
-                <div key={index} style={styleUseCallBack.wrapperTodo}>
-                    <p style={styleUseCallBack.textTodo}>{e}</p>
+                <div key={index} style={styleCustomHook.wrapperTodo}>
+                    <p style={styleCustomHook.textTodo}>{e}</p>
                 </div>
             ))}
         </div>
     );
 }
 
-const ChildUseCallbackPage = memo((props: { addCount: (value: string) => void }) => {
+const ChildComponent = memo((props: { addCount: (value: string) => void }) => {
     console.log('rendering');
 
     return (
@@ -41,4 +38,4 @@ const ChildUseCallbackPage = memo((props: { addCount: (value: string) => void })
     )
 })
 
-export default UseCallBackPage
+export default CustomHookPage
